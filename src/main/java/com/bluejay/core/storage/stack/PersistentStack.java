@@ -1,10 +1,12 @@
 package com.bluejay.core.storage.stack;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import com.bluejay.core.exception.FCException;
 import com.bluejay.core.index.FCIndex;
+import com.bluejay.core.index.IndexEquals;
 import com.bluejay.core.index.IndexParser;
 import com.bluejay.core.queue.FCTask;
 import com.bluejay.core.queue.IndexTask;
@@ -114,15 +116,27 @@ public class PersistentStack extends BasicStack {
 	 * 
 	 */
 	void addNodeToIndex(FCNode node) throws FCException {
+		boolean useDefaults = false;
+		if (indexesMap == null) {
+			useDefaults = true;
+			indexesMap = new HashMap<String, FCIndex>();
+		}
+		
 		Map<String, Object> map = JsonUtils.convertJsonToMap(node.getData().getJSONData());
 		Set<String> fields = map.keySet();
 		for (String fieldKey : fields) {
-			FCIndex index = indexesMap.get(fieldKey);
+			FCIndex index = null;
+			if (useDefaults){
+				index = new IndexEquals(getDataType(), fieldKey);
+				indexesMap.put(fieldKey, index);
+			} else {
+				index = indexesMap.get(fieldKey);
+			}
 			if (index != null && map.get(fieldKey) != null){
 				Long id = Long.parseLong((String) map.get("id"));
 				Object fieldValue = map.get(fieldKey);
 				if (JsonUtils.isArray(fieldValue)){
-					
+					//TODO: deal with inner arrays
 				}else{
 					index.insert((String) fieldValue, id);	
 				}

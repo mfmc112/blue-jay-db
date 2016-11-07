@@ -32,7 +32,7 @@ public class IndexParserTest {
 	public void getIndexesInnerArrayTest() throws FCException {
 		IndexParser parser = new IndexParser();
 		Map<String, FCIndex> indexMap = parser.getIndexes("cars", null);
-		Assert.assertTrue(FCIndexType.EQUALS == indexMap.get("avatar_url").getIndexType());
-		Assert.assertTrue(FCIndexType.STARTS_WITH == indexMap.get("login").getIndexType());
+		Assert.assertTrue(FCIndexType.EQUALS == indexMap.get("cars.make").getIndexType());
+		Assert.assertTrue(FCIndexType.STARTS_WITH == indexMap.get("name").getIndexType());
 	}
 }

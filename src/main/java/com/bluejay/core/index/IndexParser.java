@@ -9,6 +9,7 @@ import com.bluejay.core.exception.FCException;
 import com.bluejay.core.utils.FileUtils;
 import com.bluejay.core.utils.JsonUtils;
 import com.bluejay.core.utils.PropertiesUtil;
+import com.bluejay.logger.Logger;
 
 /**
  * Parse the mapping from JSON format into a Map of Indexes using 
@@ -21,6 +22,7 @@ import com.bluejay.core.utils.PropertiesUtil;
  */
 public class IndexParser {
 
+	private Logger log = new Logger(IndexParser.class);
 	private final String MAPPING_SUFFIX = "_mapping";
 	
 	/**
@@ -36,8 +38,12 @@ public class IndexParser {
 		if (dataType == null || dataType.equals("")) throw new FCException("dataType cannot be null or empty");
 		
 		if (mapping == null){
-			mapping = openMappingFileAsJSON(dataType);
-			if (mapping == null || mapping.size() <= 0) throw new FCException("Mapping file not found");
+			try{
+				mapping = openMappingFileAsJSON(dataType);
+			} catch(FCException e) {
+				log.warning("Mapping file not found. The default (IndexEquals) will be used to every field.");
+				return null;
+			}
 		}
 		
 		Map<String, FCIndex> indexMap = new HashMap<String, FCIndex>();
@@ -62,28 +68,6 @@ public class IndexParser {
 		}
 		return indexMap;
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public Map<String, FCIndex> getIndexesOld(String dataType) throws FCException {
-//		Map<String, Object> map = openMappingFileAsJSON(dataType);
-//		Map<String, FCIndex> indexMap = new HashMap<String, FCIndex>();
-//		for (String key : map.keySet()) {
-//			FCIndexType indexType = null;
-//			Object value = map.get(key);
-//			if (value instanceof List){
-//				for (Object element : (List<Object>) value) {
-//					getIndexes(dataType);
-//				}
-//			}else{
-//				indexType = FCIndexType.getByType((String) map.get(key));
-//			}
-//			
-//			if (indexType != null ) {
-//				indexMap.put(key, IndexFactory.createIndex(indexType, dataType, key));
-//			}
-//		}
-//		return indexMap;
-//	}
 	
 	public Map<String, Object> openMappingFileAsJSON(String dataType) throws FCException {
 		File mapping = new File(PropertiesUtil.getFilePath(dataType + MAPPING_SUFFIX)+".json");
