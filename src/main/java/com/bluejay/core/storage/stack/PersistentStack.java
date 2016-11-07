@@ -31,8 +31,8 @@ public class PersistentStack extends BasicStack {
 	}
 	
 	/**
-	 * Commits all the changes made to the stackNodes. This method 
-	 * update the indexes.
+	 * Commits all the changes made to the stackNodes. 
+	 * This method update the indexes asynchronously.
 	 *  
 	 */
 	@Override
@@ -46,8 +46,8 @@ public class PersistentStack extends BasicStack {
 	}
 	
 	/**
-	 * Commits all the changes made to the stackNodes. This method does 
-	 * not update the indexes.
+	 * Commits all the changes made to the stackNodes. 
+	 * This method does not update the indexes.
 	 *  
 	 */
 	@Override

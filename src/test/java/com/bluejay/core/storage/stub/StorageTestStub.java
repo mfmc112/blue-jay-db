@@ -1,6 +1,10 @@
 package com.bluejay.core.storage.stub;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +88,22 @@ public class StorageTestStub {
 	
 	public String jsonStringSunny = jsonString.replace("mfmc112", "sunny");
 	
+	/** 
+	 * create necessary mapping files used into the unit tests
+	 * @throws FCException
+	 * @throws IOException
+	 */
+	public void saveMappingsForTest() throws FCException { 
+		File fileCars = new File(PropertiesUtil.getFilePath()+"\\cars_mapping.json");
+		if (!fileCars.exists()) createFile(fileCars, "cars_mapping.json");
+		
+		File fileIndexEquals = new File(PropertiesUtil.getFilePath()+"\\index-equals_mapping.json");
+		if (!fileIndexEquals.exists()) createFile(fileIndexEquals, "index-equals_mapping.json");
+		
+		File filePipeIndex = new File(PropertiesUtil.getFilePath()+"\\pipe-index_mapping.json");
+		if (!filePipeIndex.exists()) createFile(filePipeIndex, "pipe-index_mapping.json");
+	}
+	
 	public List<Long> generateRandomNumbers(long max){
 		List<Long> n = new ArrayList<Long>();
 		for (long i=0;i<(max/2);i++){
@@ -113,5 +133,25 @@ public class StorageTestStub {
 		for (File file : files) {
 			file.delete();
 		}
+		saveMappingsForTest();
+	}
+
+	private void createFile(File file, String fileName) throws FCException {
+		InputStream content = getClass().getClassLoader().getResourceAsStream(fileName);
+		OutputStream out;
+		try {
+			out = new FileOutputStream(file);
+			byte[] bytes = new byte[1024];
+			int read = 0;
+			while ((read = content.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			throw new FCException("cannot create mapping files to be used into the Unit Tests", e);
+		}
+		
+		
 	}
 }

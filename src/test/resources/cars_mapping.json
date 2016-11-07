@@ -1,0 +1,14 @@
+{
+	"id":"id",
+	"name":"startsWith", 
+	"cars":[
+		{"make":"exactMatch", 
+		 "model":"exactMatch", 
+		 "accessories":[
+			{"type":"exactMatch", 
+			 "installed":"boolean"
+			}
+		 ]
+		}
+	]
+}
