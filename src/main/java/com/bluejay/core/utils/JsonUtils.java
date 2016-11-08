@@ -61,6 +61,10 @@ public class JsonUtils {
 		return (value != null && value instanceof JsonArray);
 	}
 
+	public static boolean isNull(Object value) {
+		return (value == null || value instanceof JsonNull);
+	}
+	
 	public static boolean isNull(JsonElement value) {
 		return (value == null || value instanceof JsonNull);
 	}

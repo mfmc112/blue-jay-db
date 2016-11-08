@@ -53,7 +53,7 @@ public class BasicStack extends AbstractStack {
 	}
 	
 	@Override
-	public void commitNoIndex() throws FCException {
+	public void commit(boolean refreshIndex) throws FCException {
 		// This stack do not commit
 	}
 
@@ -73,7 +73,12 @@ public class BasicStack extends AbstractStack {
 	}
 
 	@Override
-	public void refreshIndex(Set<Long> ids) throws FCException {
+	public void refreshIndexForClusters(Set<Long> clusterIds) throws FCException {
+		// Basic stack doesn't update any index
+	}
+
+	@Override
+	public void refreshIndexForSingleCluster(Long cluesterId) throws FCException {
 		// TODO Auto-generated method stub
 		
 	}

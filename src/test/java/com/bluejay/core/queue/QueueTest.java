@@ -45,6 +45,6 @@ public class QueueTest extends StubData {
 			stack.push( new LinkedNode(new Long(i), new FCData(stub.singleJsonString)) );
 		}
 		QueueTest.log.info("added (" + numOfRecords + ") records into the stack in " + log.endTimer() + " ms");
-		stack.commitNoIndex();
+		stack.commit(false);
 	}
 }

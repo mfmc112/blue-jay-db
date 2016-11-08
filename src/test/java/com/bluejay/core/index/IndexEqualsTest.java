@@ -27,11 +27,11 @@ public class IndexEqualsTest extends StubData {
 		// create node and add to the stack
 		stack.push( new LinkedNode(10L, new FCData(stub.singleJsonString)) );
 		stack.push( new LinkedNode(5L, new FCData(stub.singleJsonString)) );
-		stack.commitNoIndex();
+		stack.commit(false);
 		
 		Set<Long> clusterIds = new HashSet<Long>();
 		clusterIds.add(0L);
-		stack.refreshIndex(clusterIds);
+		stack.refreshIndexForClusters(clusterIds);
 		
 		long s1 = System.currentTimeMillis();
 		FCIndex indexName = new IndexEquals("index-equals", "avatar_url");
@@ -40,7 +40,6 @@ public class IndexEqualsTest extends StubData {
 		
 		Assert.assertTrue(idsFound.contains(1028680L));
 		Assert.assertTrue((s2-s1)<1000);
-		
-		
 	}
+	
 }

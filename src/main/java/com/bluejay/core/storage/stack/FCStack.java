@@ -13,7 +13,7 @@ public interface FCStack {
 	
 	void commit() throws FCException;
 	
-	void commitNoIndex() throws FCException;
+	void commit(boolean refreshIndex) throws FCException;
 	
 	void rollback() throws FCException;
 	
@@ -27,8 +27,10 @@ public interface FCStack {
 	
 	long clusterSize(Long locatorId);
 	
-	public void clear() throws FCException;
+	void clear() throws FCException;
 
-	void refreshIndex(Set<Long> ids) throws FCException;
+	void refreshIndexForClusters(Set<Long> ids) throws FCException;
+	
+	void refreshIndexForSingleCluster(Long cluesterId) throws FCException;
 	
 }

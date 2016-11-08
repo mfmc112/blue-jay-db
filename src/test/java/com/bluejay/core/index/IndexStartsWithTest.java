@@ -27,11 +27,11 @@ public class IndexStartsWithTest extends StubData {
 		// create node
 		stack.push( new LinkedNode(10L, new FCData(stub.singleJsonString.replaceAll("Marcos Costa", "Ana Goulet").replaceAll("mfmc112", "ana300").replace("1028680", "1121123"))) );
 		stack.push( new LinkedNode(5L, new FCData(stub.singleJsonString)));
-		stack.commitNoIndex();
+		stack.commit(false);
 		
 		Set<Long> clusterIds = new HashSet<Long>();
 		clusterIds.add(0L);
-		stack.refreshIndex(clusterIds);
+		stack.refreshIndexForClusters(clusterIds);
 		
 		long s1 = System.currentTimeMillis();
 		FCIndex indexLogin = new IndexStartsWith("index-equals", "login");

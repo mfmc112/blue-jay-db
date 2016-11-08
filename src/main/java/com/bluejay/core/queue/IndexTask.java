@@ -7,6 +7,12 @@ import com.bluejay.core.storage.stack.FCStack;
 import com.bluejay.core.storage.stack.PersistentStack;
 import com.bluejay.logger.Logger;
 
+/**
+ * Implementation of Task that refreshes the indexes from the PersistentStack
+ *  
+ * @author Marcos Costa
+ *
+ */
 public class IndexTask implements FCTask {
 
 	Logger log = new Logger(IndexTask.class);
@@ -27,7 +33,7 @@ public class IndexTask implements FCTask {
 	@Override
 	public void execute() throws FCException {
 		FCStack stack = new PersistentStack(dataType);
-		stack.refreshIndex(ids);
+		stack.refreshIndexForClusters(ids);
 		log.info("Task " + getName() + " executed from the pipeline successfully");
 	}
 	
