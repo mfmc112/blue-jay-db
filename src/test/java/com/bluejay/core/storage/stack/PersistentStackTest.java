@@ -9,9 +9,8 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import com.bluejay.core.exception.FCException;
-import com.bluejay.core.index.FCIndex;
-import com.bluejay.core.index.IndexEquals;
 import com.bluejay.core.metadata.FCData;
+import com.bluejay.core.search.Search;
 import com.bluejay.core.storage.node.FCNode;
 import com.bluejay.core.storage.node.LinkedNode;
 import com.bluejay.core.storage.stub.StubData;
@@ -93,13 +92,7 @@ public class PersistentStackTest extends StubData {
 		Set<Long> clusterIds = new HashSet<Long>();
 		clusterIds.add(0L);
 		stack.refreshIndexForSingleCluster(0L);
-//		
-//		long s1 = System.currentTimeMillis();
-//		FCIndex indexName = new IndexEquals("index-equals", "avatar_url");
-//		Set<Long> idsFound = indexName.search("https://avatars.githubusercontent.com/u/1028680?v=3");
-//		long s2 = System.currentTimeMillis();
-//		
-//		Assert.assertTrue(idsFound.contains(1028680L));
-//		Assert.assertTrue((s2-s1)<1000);
+		Assert.assertTrue(true); // it worked if no exceptions
+		//TODO: Validate if the physical files were created
 	}
 }

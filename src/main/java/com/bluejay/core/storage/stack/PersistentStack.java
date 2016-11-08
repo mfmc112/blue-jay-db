@@ -36,13 +36,14 @@ import com.bluejay.logger.Logger;
  * </p>
  * @author Marcos Costa
  */
-public class PersistentStack extends BasicStack {
+public class PersistentStack extends BasicStack implements FCStackIndex {
 
 	Logger log = new Logger(PersistentStack.class);
 	Map<String, FCIndex> indexesMap;	
 
-	public PersistentStack(String dataType){
+	public PersistentStack(String dataType) throws FCException{
 		super(dataType);
+		buildIndexMap(getDataType());
 	}
 	
 	/**
@@ -99,15 +100,16 @@ public class PersistentStack extends BasicStack {
 	@Override
 	public void refreshIndexForClusters(Set<Long> clusterIds) throws FCException {
 		if (clusterIds == null) return;
-		buildIndexMap(getDataType());
+//		buildIndexMap(getDataType());
 		for (Long clusterId : clusterIds) {
 			refreshIndexForSingleCluster(clusterId);
 		}
 	}
 	
+	@Override
 	public void refreshIndexForSingleCluster(Long clusterId) throws FCException {
 		if (clusterId == null) return;
-		buildIndexMap(getDataType());
+//		buildIndexMap(getDataType());
 		FCNode node = getNode(clusterId).getFirstNode();
 		log.info("refreshing nodes from cluster (" + clusterId + ")");
 
@@ -240,5 +242,11 @@ public class PersistentStack extends BasicStack {
 	 */
 	private Map<String, Object> readDataFromNode(FCNode node) throws FCException {
 		return JsonUtils.convertJsonToMap(node.getData().getJSONData());
+	}
+
+	@Override
+	public FCIndex getIndexForField(String field) {
+		if (indexesMap != null) return indexesMap.get(field);
+		return null;
 	}
 }
