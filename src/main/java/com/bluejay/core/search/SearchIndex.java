@@ -5,7 +5,6 @@ import java.util.Set;
 import com.bluejay.core.exception.FCException;
 import com.bluejay.core.index.FCIndex;
 import com.bluejay.core.storage.stack.FCStackIndex;
-import com.bluejay.core.storage.stack.PersistentStack;
 
 /**
  * <p>Search a value into an index. The stack received already contains the DB and
