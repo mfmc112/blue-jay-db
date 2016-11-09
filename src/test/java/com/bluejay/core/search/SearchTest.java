@@ -15,4 +15,5 @@ public class SearchTest {
 		Set<Long> ids = s.search("{\"cars.make\":\"Infiniti\"");
 		System.out.println(ids);
 	}
+	
 }

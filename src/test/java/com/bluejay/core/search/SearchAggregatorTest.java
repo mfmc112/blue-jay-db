@@ -56,7 +56,8 @@ public class SearchAggregatorTest {
 		Set<Long> aggregatedSet = s.aggregateAnd(set1, set2);
 		long ended = log.endTimer();
 		System.out.println(ended);
-		// It needs to run in less then 10 milliseconds. Yes 1/10 of a second
+		
+		// It needs to run in less then 100 milliseconds for 100k. Yes 1/10 of a second
 		Assert.assertTrue(ended <=100);
 		Assert.assertEquals(30000, aggregatedSet.size());
 	}
@@ -109,7 +110,8 @@ public class SearchAggregatorTest {
 		Set<Long> aggregatedSet = s.aggregateAnd(set1, set2);
 		long ended = log.endTimer();
 		System.out.println(ended);
-		// It needs to run in less then 10 milliseconds. Yes 1/10 of a second
+		
+		// It needs to run in less then 100 milliseconds for 100k. Yes 1/10 of a second
 		Assert.assertTrue(ended <=100);
 		Assert.assertEquals(30000, aggregatedSet.size());
 	}

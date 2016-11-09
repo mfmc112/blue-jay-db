@@ -1,5 +1,6 @@
 package com.bluejay.core.search;
 
+import java.util.Map;
 import java.util.Set;
 
 import com.bluejay.core.exception.FCException;
@@ -17,7 +18,13 @@ public class Search {
 	}
 
 	public Set<Long> search(String json) {
-		// TODO We need an SearchAggregator to filter out the ids
+		
+		// TODO I need to parse the query an SearchAggregator to filter out the ids
+		// The query format needs to be defined :) FUN PART 
 		return null;
 	}
+
+	
+	
+	
 }
