@@ -12,7 +12,7 @@ public class SearchTest {
 	@Test
 	public void searchTest() throws FCException {
 		Search s = new Search("cars");
-		Set<Long> ids = s.search("cars.make", "Infiniti");
+		Set<Long> ids = s.search("{\"cars.make\":\"Infiniti\"");
 		System.out.println(ids);
 	}
 }
