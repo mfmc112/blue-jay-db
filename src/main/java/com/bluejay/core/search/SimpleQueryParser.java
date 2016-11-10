@@ -11,7 +11,7 @@ import com.bluejay.core.utils.JsonUtils;
  * @author Marcos Costa
  *
  */
-public class SimpleQueryParser implements QueryParser {
+public class SimpleQueryParser implements FCQueryParser {
 
 	@Override
 	public Map<String, Object> parseQuery(String jsonQuery) throws FCException {

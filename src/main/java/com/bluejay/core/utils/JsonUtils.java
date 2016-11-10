@@ -52,7 +52,10 @@ public class JsonUtils {
 				List<Map<String, Object>> list = parseArrayAsList(key, value, key);
 				if (list != null) mapToReturn.put(buildKey(superKey, key), list);
 			}else{
-				mapToReturn.put(buildKey(superKey, key), value.getAsString());	
+				if (value.isJsonPrimitive())
+					mapToReturn.put(buildKey(superKey, key), value.getAsString());
+				else 
+					mapToReturn.put(buildKey(superKey, key), value);
 			}
 		}		
 	}
